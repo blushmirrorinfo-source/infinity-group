@@ -22,15 +22,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f3f5f7;--sheet:#ffffff;--ink:#14202e;--muted:#55657a;--rule:#c9d2dc;--accent:#b4530a;
+  --paper:#f3f5f7;--sheet:#ffffff;--ink:#14202e;--muted:#55657a;--rule:#c9d2dc;--accent:#b4530a;--brand:#003c73;
   --display:"Archivo","Arial Narrow",Arial,sans-serif;
   --body:"IBM Plex Sans","Segoe UI",Helvetica,Arial,sans-serif;
   --mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--paper:#0f1722;--sheet:#172230;--ink:#e8edf3;--muted:#9fb0c3;--rule:#30404f;--accent:#f0a35c;color-scheme:dark}
+  :root:not([data-theme="light"]){--paper:#0f1722;--sheet:#172230;--ink:#e8edf3;--muted:#9fb0c3;--rule:#30404f;--accent:#f0a35c;--brand:#8fbdea;color-scheme:dark}
 }
-:root[data-theme="dark"]{--paper:#0f1722;--sheet:#172230;--ink:#e8edf3;--muted:#9fb0c3;--rule:#30404f;--accent:#f0a35c;color-scheme:dark}
+:root[data-theme="dark"]{--paper:#0f1722;--sheet:#172230;--ink:#e8edf3;--muted:#9fb0c3;--rule:#30404f;--accent:#f0a35c;--brand:#8fbdea;color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
@@ -38,48 +38,59 @@ a{color:var(--accent)}
 a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
 header{border-bottom:1px solid var(--rule);background:var(--sheet)}
-.bar{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;justify-content:space-between;padding:18px 0}
+.bar{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline;justify-content:space-between;padding:18px 20px}
 .brand{font-family:var(--display);font-weight:800;font-size:1.05rem;letter-spacing:.02em;text-transform:uppercase}
 nav{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.95rem}
 nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
 nav a:hover{border-bottom-color:var(--accent)}
 .intro{padding:64px 0 48px}
-.intro h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,6vw,3.6rem);line-height:1.05;margin:0 0 20px;max-width:16ch;text-wrap:balance}
+.hero-row{display:flex;align-items:center;margin:0 0 20px}
+.hero-symbol{position:relative;overflow:hidden;flex:none;width:252px;height:132px;mix-blend-mode:multiply;clip-path:polygon(0 0,236px 0,236px 29px,252px 29px,252px 132px,0 132px)}
+.hero-symbol img{position:absolute;left:-62px;top:-12px;width:401px;max-width:none;height:auto}
+.intro h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,6vw,3.6rem);line-height:1.05;margin:0 auto;white-space:nowrap}
 .intro p{max-width:62ch;margin:0;font-size:1.12rem;color:var(--muted)}
+@media (min-width:1080px){.intro p{max-width:none;font-size:.96rem;white-space:nowrap}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero-symbol{mix-blend-mode:screen;filter:invert(1) hue-rotate(180deg)}}
+:root[data-theme="dark"] .hero-symbol{mix-blend-mode:screen;filter:invert(1) hue-rotate(180deg)}
+.apps-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;margin:0 0 6px}
+.apps-head h2{margin:0}
+.made-for{font-weight:600;color:var(--brand);white-space:nowrap}
 h2{font-family:var(--display);font-weight:700;font-size:1.5rem;margin:0 0 6px;text-wrap:balance}
 section{padding:0 0 56px}
 .lead{max-width:62ch;color:var(--muted);margin:0 0 22px}
 .apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.app{background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--accent);padding:22px 24px}
-.app h3{font-family:var(--display);font-weight:700;font-size:1.2rem;margin:0 0 6px}
+.app{background:var(--sheet);border:3px solid var(--brand);padding:22px 24px;display:flex;flex-direction:column}
+.app h3{font-family:var(--display);font-weight:700;font-size:1.2rem;margin:0 0 6px;display:flex;align-items:center;gap:12px}
+.app-icon{width:44px;height:44px;border-radius:10px;flex:none}
 .app p{margin:0;color:var(--muted)}
 .app ul{margin:12px 0 0;padding-left:18px;color:var(--ink)}
 .app li{margin:3px 0}
-.app .links{margin-top:14px;font-size:.92rem;display:flex;flex-wrap:wrap;gap:4px 16px}
-.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--rule);background:var(--sheet)}
-.pr{padding:22px 24px;border-right:1px solid var(--rule)}
+.app .links{margin-top:auto;padding-top:14px;font-size:.92rem;display:flex;flex-wrap:wrap;gap:4px 16px}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:3px solid var(--brand);background:var(--sheet)}
+.pr{padding:22px 24px;border-right:3px solid var(--brand)}
 .pr:last-child{border-right:0}
 .code{font-family:var(--mono);font-size:.82rem;color:var(--accent);letter-spacing:.06em;display:block;margin-bottom:8px}
 .pr p{margin:0;color:var(--muted)}
-.work-h{margin:22px 0 6px;color:var(--muted)}
-.work{margin:0;padding-left:20px}
-.work li{margin:3px 0}
-.title-block{display:grid;grid-template-columns:2fr 1fr 1fr;border:2px solid var(--ink);background:var(--sheet);font-variant-numeric:tabular-nums}
-.tb{padding:14px 16px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);min-width:0}
-.tb:nth-child(3n){border-right:0}
-.tb:nth-last-child(-n+3){border-bottom:0}
-.tb span{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.tb b{font-weight:600;overflow-wrap:anywhere}
+.work-h{margin:0 0 6px;color:var(--muted)}
+.work{margin:0;padding:0;list-style:none}
+.work li{display:flex;align-items:center;gap:12px;margin:10px 0}
+.work a{color:var(--ink)}
+.store-logo{width:32px;height:32px;object-fit:contain;flex:none}
+.store-logo.crop-left{object-fit:cover;object-position:left center}
+.store-logo.big{transform:scale(1.3)}
 footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--muted);font-size:.9rem}
+.footer-links{justify-content:space-between;gap:8px 20px;margin:0 0 14px;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.footer-links a{color:var(--brand);border:0;padding:0}
+.footer-links a:hover{text-decoration:underline}
 @media (max-width:640px){
   .apps,.principles{grid-template-columns:1fr}
-  .pr{border-right:0;border-bottom:1px solid var(--rule)}
+  .pr{border-right:0;border-bottom:3px solid var(--brand)}
   .pr:last-child{border-bottom:0}
-  .title-block{grid-template-columns:1fr}
-  .tb{border-right:0}
-  .tb:nth-last-child(-n+3){border-bottom:1px solid var(--ink)}
-  .tb:last-child{border-bottom:0}
   .intro{padding:40px 0 32px}
+}
+@media (max-width:900px){
+  .hero-row{flex-direction:column;align-items:flex-start;gap:14px}
+  .intro h1{margin:0;white-space:normal}
 }
 </style>
 </head>
@@ -90,24 +101,28 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--muted);f
     <nav aria-label="Sections">
       <a href="#apps">Our apps</a>
       <a href="#how">How we build</a>
-      <a href="#company">Company details</a>
-      <a href="#contact">Contact</a>
+      <a href="#stores">Online stores</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
   <div class="intro">
-    <h1>Simple, private apps for everyday life.</h1>
+    <div class="hero-row">
+      <div class="hero-symbol"><img src="1795172144869_image.png" alt="Infinity symbol"></div>
+      <h1>Simple, private apps<br>for everyday life.</h1>
+    </div>
     <p>Infinity Group makes mobile apps for iPhone and Android. Our apps do one job well, keep your information on your own phone, and never show ads.</p>
   </div>
 
   <section id="apps" aria-labelledby="apps-h">
-    <h2 id="apps-h">Our apps</h2>
+    <div class="apps-head"><h2 id="apps-h">Our apps</h2><span class="made-for">Made for Apple &amp; Android</span></div>
     <p class="lead">Each app has its own support email and privacy policy.</p>
     <div class="apps">
       <div class="app">
-        <h3>Wardkin: Family Care</h3>
+        <h3><img class="app-icon" src="data:image/webp;base64,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" alt="Wardkin app icon" width="44" height="44">Wardkin: Family Care</h3>
         <p>An organiser for people looking after an ageing parent, with everything in one place.</p>
         <ul>
           <li>Medications and reminders</li>
@@ -122,7 +137,7 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--muted);f
         </div>
       </div>
       <div class="app">
-        <h3>BlushMirror: Makeup Light</h3>
+        <h3><img class="app-icon" src="data:image/webp;base64,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" alt="BlushMirror app icon" width="44" height="44">BlushMirror: Makeup Light</h3>
         <p>Turns your phone into a lit mirror for doing makeup, at home or on the go.</p>
         <ul>
           <li>Adjustable light around the screen</li>
@@ -148,41 +163,31 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--muted);f
     </div>
   </section>
 
-  <section id="company" aria-labelledby="co-h">
-    <h2 id="co-h">Company details</h2>
-    <p class="lead">Infinity Group is the trading name used for the apps of the company below. You can confirm these details on the <a href="https://abr.business.gov.au/ABN/View?abn=89686504790">Australian Business Register</a>.</p>
-    <div class="title-block">
-      <div class="tb"><span>Legal name</span><b>Infinity Architects &amp; Builders Pty Ltd</b></div>
-      <div class="tb"><span>ABN</span><b>89 686 504 790</b></div>
-      <div class="tb"><span>ACN</span><b>686 504 790</b></div>
-      <div class="tb"><span>Address</span><b>1/31-33 Wattle St, Punchbowl NSW 2196, Australia</b></div>
-      <div class="tb"><span>Registered</span><b>24 April 2025</b></div>
-      <div class="tb"><span>Trading name</span><b>Infinity Group</b></div>
-    </div>
+  <section id="stores" aria-label="Online stores">
     <p class="work-h">The company's work also includes these online stores:</p>
     <ul class="work">
-      <li>Garden Mega Store: www.gardenmegastore.shop</li>
-      <li>YonderNook: www.yondernook.com.au</li>
-      <li>SheFinds: www.shefinds.store</li>
-      <li>SnugMunch: www.snugmunch.com</li>
-      <li>WhiskWag: www.whiskwag.com.au</li>
-      <li>ToyNova: www.toynova.com.au</li>
+      <li><img class="store-logo" src="https://www.gardenmegastore.shop/cdn/shop/files/garden_header_circle.png?height=84&amp;v=1794302965" alt="Garden Mega Store logo" width="32" height="32" loading="lazy"><span>Garden Mega Store: <a href="https://www.gardenmegastore.shop">www.gardenmegastore.shop</a></span></li>
+      <li><img class="store-logo crop-left big" src="https://yondernook.com.au/cdn/shop/files/yondernook_logo_header.png?height=56&amp;v=1794301563" alt="YonderNook logo" width="32" height="32" loading="lazy"><span>YonderNook: <a href="https://www.yondernook.com.au">www.yondernook.com.au</a></span></li>
+      <li><img class="store-logo" src="https://shefinds.store/cdn/shop/files/shefinds_header_circle.png?height=84&amp;v=1794302491" alt="SheFinds logo" width="32" height="32" loading="lazy"><span>SheFinds: <a href="https://www.shefinds.store">www.shefinds.store</a></span></li>
+      <li><img class="store-logo" src="https://snugmunch.com/cdn/shop/files/snugmunch_logo_v2.png?height=100&amp;v=1794306673" alt="SnugMunch logo" width="32" height="32" loading="lazy"><span>SnugMunch: <a href="https://www.snugmunch.com">www.snugmunch.com</a></span></li>
+      <li><img class="store-logo" src="https://whiskwag.com.au/cdn/shop/files/whiskwag_logo_v3.png?height=100&amp;v=1794306504" alt="WhiskWag logo" width="32" height="32" loading="lazy"><span>WhiskWag: <a href="https://www.whiskwag.com.au">www.whiskwag.com.au</a></span></li>
+      <li><img class="store-logo big" src="https://toynova.com.au/cdn/shop/files/toynova-logo.png?height=100&amp;v=1793835927" alt="ToyNova logo" width="32" height="32" loading="lazy"><span>ToyNova: <a href="https://www.toynova.com.au">www.toynova.com.au</a></span></li>
     </ul>
-  </section>
-
-  <section id="contact" aria-labelledby="ct-h">
-    <h2 id="ct-h">Contact</h2>
-    <p class="lead">For help with an app, email that app's support address above. For anything else, contact the company directly. We reply within one to two business days.</p>
-    <div class="title-block">
-      <div class="tb"><span>Email</span><b><a href="mailto:mgs.info8@gmail.com">mgs.info8@gmail.com</a></b></div>
-      <div class="tb"><span>Phone</span><b><a href="tel:+61450773377">+61 450 773 377</a></b></div>
-      <div class="tb"><span>Address</span><b>1/31-33 Wattle St, Punchbowl NSW 2196, Australia</b></div>
-    </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">&copy; 2026 Infinity Architects &amp; Builders Pty Ltd, trading as Infinity Group. ABN 89 686 504 790.<br><a href="#contact">Contact</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></div>
+  <div class="wrap">
+    <nav class="footer-links" aria-label="Footer">
+      <a href="faq.html">FAQs</a>
+      <a href="legal.html">Legal</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    &copy; 2026 Infinity Architects &amp; Builders Pty Ltd, trading as Infinity Group. ABN 89 686 504 790.
+  </div>
 </footer>
 </body>
 </html>
